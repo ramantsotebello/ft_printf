@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/07/17 07:15:13 by tramants         ###   ########.fr       */
+/*   Updated: 2018/07/20 15:44:06 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int		ft_printf(const char *format, ...)
 				ft_putnbr(va_arg(args, int));
 			i++;	
 		}
+		if (format[i] == '%')
+		{
+			i++;
+
+		}	
 		ft_putchar(format[i]);
 		i++;
 	}	
