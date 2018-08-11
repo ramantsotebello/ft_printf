@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:12:03 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/10 17:23:58 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/11 16:22:48 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,14 @@ struct options_list	ft_check_options(char *str)
 
 		if (ft_isflag(str[i]))
 		{
-			options.flag = str[i];
+			//options.flag = str[i];
 			i++;
 		}
 		else if (ft_iswidth(str[i]))
 		{
-			options.width = ft_atoi(str[i]);
+			options.width = str[i];
 			i++;
 		}
-		else if (ft_isprecision(str[i]))
-		{
-			i++;
-			options.precision = str[i];
-			i++;
-		}
-		else if (	
 	}
 	return (options);
 }

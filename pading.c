@@ -68,7 +68,7 @@ void	padding(char *val, int  lr, int j, int zero)
 			if (zero == ZERO)
 				printf("0");
 			else
-			printf(" ");
+				printf(" ");
 			lr--;
 		}
 		if	(j == RIGHT)

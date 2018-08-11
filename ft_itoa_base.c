@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_itao_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:44 by tramants         ###   ########.fr       */
+/*   Created: 2018/08/11 11:32:55 by tramants          #+#    #+#             */
+/*   Updated: 2018/08/11 16:22:47 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_itoa_base(size_t num, int base, int cap)
 {
-	va_list		args;
-	int			i;
-	int			ret;
+	char	*str;
+	size_t	num_len;
+	char	x;
 
-	va_start(args, format);
-	i = 0;
-	ret = 0;
-	while(format[i] != '\0')
+	num_len = ft_number_len(num, base);
+	str = (char*)malloc(sizeof(char) * num_len + 1);
+	str[num_len] = '\0';
+	num_len--;
+	
+	while (num > 0)
 	{
-		if (format[i] == '%')
-		{
-			i++;
-			if ((ft_basic_oc(args, format[i])) == 0)
-			{
-				while ((format[i]) && (ft_is_outputc(format[i]) != 1))
-				{
-					
-				}
-			}
-			i++;	
-		}
-		ft_putchar(format[i]);
-		i++;
-	}	
-	va_end(args);
-
-	return (ret + (i - 2));
-}
+		x = num % base;
+		if (x < 10)
+			str[num_len] = x + '0';
+		else
+			str[num_len] = x + ((cap == 1) ? 'A' : 'a')  - 10;
+		num_len--;
+		num /= base;
+	}
+	return (str);
+}	

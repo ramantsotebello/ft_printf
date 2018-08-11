@@ -6,28 +6,28 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:56:00 by tramants          #+#    #+#             */
-/*   Updated: 2018/07/16 17:34:02 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/11 13:12:11 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putnbr(int num)
+int		ft_putnbr(long n)
 {
-	int		i;
+	long		num;
 
-	if(num == -2147483648)
-		ft_putstr("2147483648");
+	num = n;
 	if (num < 0)
 	{
 		num = -num;
 		ft_putchar('-');
 	}
-	if (num > 9)
+	if (num >= 10)
 	{
-		i = num / 10;
-		num -= 10 * i;
-		ft_putnbr(i);
+		ft_putnbr(num / 10);
+		ft_putnbr(num % 10);
 	}
-	ft_putchar('0' + num);
+	else
+		ft_putchar('0' + num);
+	return (num);
 }

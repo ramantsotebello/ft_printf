@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putoct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:44 by tramants         ###   ########.fr       */
+/*   Created: 2018/08/11 13:21:53 by tramants          #+#    #+#             */
+/*   Updated: 2018/08/11 13:49:25 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+int		ft_putoct(size_t num)
 {
-	va_list		args;
-	int			i;
-	int			ret;
+	char	*oct;
+	size_t	num_len;
+	char	c;
+	int		count;
 
-	va_start(args, format);
-	i = 0;
-	ret = 0;
-	while(format[i] != '\0')
+	num_len = ft_number_len(num, 8);
+	oct = (char*)malloc(sizeof(char) * num_len + 1);
+	oct[num_len] = '\0';
+	num_len--;
+	while (num > 0)
 	{
-		if (format[i] == '%')
-		{
-			i++;
-			if ((ft_basic_oc(args, format[i])) == 0)
-			{
-				while ((format[i]) && (ft_is_outputc(format[i]) != 1))
-				{
-					
-				}
-			}
-			i++;	
-		}
-		ft_putchar(format[i]);
-		i++;
-	}	
-	va_end(args);
-
-	return (ret + (i - 2));
+		c = num % 8;
+		if (c < 8)
+			oct[num_len] = c + '0';
+		num_len--;
+		num /= 8;
+	}
+	count = ft_putstr(oct);
+	return (count);
 }

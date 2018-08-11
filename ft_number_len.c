@@ -1,44 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_number_len.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:44 by tramants         ###   ########.fr       */
+/*   Created: 2018/08/11 13:28:05 by tramants          #+#    #+#             */
+/*   Updated: 2018/08/11 13:29:10 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+size_t	ft_number_len(size_t x, int base)
 {
-	va_list		args;
-	int			i;
-	int			ret;
+	size_t	i;
 
-	va_start(args, format);
 	i = 0;
-	ret = 0;
-	while(format[i] != '\0')
+	while (x > 0)
 	{
-		if (format[i] == '%')
-		{
-			i++;
-			if ((ft_basic_oc(args, format[i])) == 0)
-			{
-				while ((format[i]) && (ft_is_outputc(format[i]) != 1))
-				{
-					
-				}
-			}
-			i++;	
-		}
-		ft_putchar(format[i]);
 		i++;
-	}	
-	va_end(args);
-
-	return (ret + (i - 2));
+		x /= base;
+	}
+	return (i);
 }
