@@ -6,7 +6,7 @@
 /*   By:  ramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 15:57:26 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:50 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/13 18:53:18 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ int		ft_puthex(size_t num, int cap);
 int		ft_basic_oc(va_list args, char c);
 size_t	ft_number_len(size_t x, int base);
 char	*ft_itoa_base(size_t num, int base, int cap);
-struct	options_list	{
-	char	flag[6];
-	char	width;
+struct	ol ft_check_options(char *str, int index);
+//int		ft_handleopt_oc(va_list args, char c, struct op options);
+struct	ol {
+	char	flags[12];
+	int		width;
 	char	precision;
 	char	length;
 	char	type;
-}; 
+} options_list; 
 #endif

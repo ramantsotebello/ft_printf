@@ -6,7 +6,7 @@
 #    By: tramants <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/16 15:01:33 by tramants          #+#    #+#              #
-#    Updated: 2018/08/11 16:22:51 by tramants         ###   ########.fr        #
+#    Updated: 2018/08/13 18:53:16 by tramants         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,17 @@ DEPS = ft_printf.h ft_printf.c ft_putstr.c ft_putchar.c ft_putnbr.c \
 	   main.c
 NAME = ft_printf
 
+
 make: 
 	gcc $(FLAGS) $(DEPS)
 
-fclean: clean
-	rm $(NAME)
+re: fclean
+	make
+
+fclean: 
 	rm a.out
 
 clean: 
-	rm *.o
+	rm -f *.o
+
+re: fclean all clean 

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_wide_str.c                                  :+:      :+:    :+:   */
+/*   ft_handleopt_oc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/11 14:04:38 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/13 18:53:15 by tramants         ###   ########.fr       */
+/*   Created: 2018/08/13 11:07:40 by tramants          #+#    #+#             */
+/*   Updated: 2018/08/13 18:53:23 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int		ft_put_wide_str(const wchar_t *str)
+int		ft_handleopt_oc(va_list args, char c, struct op options)
 {
-	int		count;
+	int		ret;
 
-	count = 0;
-	while(str[count])
+	ret = 0;
+	if (c == 's')
 	{
-		write(1, &str[count],1);
-		count++;
+		
 	}
-	return (count);
+	ret++;
+	return (1);
 }

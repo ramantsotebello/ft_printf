@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:12:03 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:48 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/13 18:53:20 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int		ft_is_outputc(char c)
 
 int		ft_isflag(char c)
 {
-	if ((c == '-') || (c == '+') || (c == ' ') || (c == '0') || (c == '#'))
+	if ((c == '-') || (c == '+') || (c == ' ') || (c == '0') || (c == '#')
+		|| (c == 'h') || (c == 'l') || (c == 'j') || ( c == 'z'))
 		return (1);
 	return (0);
 }
@@ -42,29 +43,53 @@ int		ft_iswidth(char c)
 	return (0);
 }
 
-struct options_list	ft_check_options(char *str)
+int		ft_isdigit(char c)
 {
-	struct options_list options;
-	int					i;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int		ft_isin(char *string, char c, int index)
+{
+	int i;
 
 	i = 0;
+	while (i <= index)
+	{
+		if (string[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+struct	ol	ft_check_options(char *str, int index)
+{
+	struct ol	options;
+	int			i;
+	int			j;
+
+	i = index;
 	while ((str[i] != '\0') && (ft_is_outputc(str[i]) != 1))
 	{
-		if (ft_is_outputc(str[i + 1]))
-			options.type = str[i + 1];
-		else if (ft_is_outputc(str[i]))
-			options.type = str[i];
-
-		if (ft_isflag(str[i]))
+		j = 0;
+		while ((ft_isflag(str[i])) && (str[i]) && (!ft_is_outputc(str[i])))
 		{
-			//options.flag = str[i];
-			i++;
+			if (str[i] == '0' && ft_isin(options.flags, '0', j))
+				i++;
+			else
+				options.flags[j++] = str[i++];
 		}
-		else if (ft_iswidth(str[i]))
+		options.flags[j] = '\0';
+		j = 0;
+		while ((ft_isdigit(str[i])) && (str[i]) && (str[i] != '.'))
 		{
-			options.width = str[i];
-			i++;
+			j += str[i++] - '0';
+			j *= 10;
 		}
+		if (j != 0)
+			options.width = (j / 10);
 	}
 	return (options);
 }

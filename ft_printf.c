@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:44 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/13 18:53:19 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int		ft_printf(const char *format, ...)
 {
-	va_list		args;
-	int			i;
-	int			ret;
+	va_list			args;
+	int				i;
+	int				ret;
+	struct	ol		options;
 
 	va_start(args, format);
 	i = 0;
@@ -26,13 +27,14 @@ int		ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			if ((ft_basic_oc(args, format[i])) == 0)
+			if ((ret += (ft_basic_oc(args, format[i]))) == 0)
 			{
-				while ((format[i]) && (ft_is_outputc(format[i]) != 1))
-				{
-					
-				}
+				options = ft_check_options((char *)format, i);
+				printf("%c\n", options.flags[0]);
+				printf("%d\n", options.width);
 			}
+			while (format[i] && !ft_is_outputc(format[i]))
+				i++;
 			i++;	
 		}
 		ft_putchar(format[i]);
@@ -40,5 +42,5 @@ int		ft_printf(const char *format, ...)
 	}	
 	va_end(args);
 
-	return (ret + (i - 2));
+	return (ret + (i - 4));
 }
