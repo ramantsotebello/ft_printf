@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:07:40 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 13:56:17 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/14 17:38:18 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,21 @@ int	ft_strlen(char *str)
 	return (count);
 }	
 
-char	*ft_getarg(va_list args, struct ol options)
+void	*ft_getarg(va_list args, struct ol options)
 {
 	char	*str;
 	wchar_t	*strl;
 
-	str = " \0";
 	if (options.type == 's')
+	{
 		str = ft_strdup(va_arg(args, char *));
+		return (str);
+	}
 	else if (options.type == 'S')
+	{
 		strl = va_arg(args, wchar_t *);
+		return (strl);
+	}
 	else if (options.type == 'c')
 		str[0] = (char)va_arg(args, int);
 	else if (options.type == 'C')
