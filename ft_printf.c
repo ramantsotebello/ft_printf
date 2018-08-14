@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:30:27 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/13 18:53:19 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/14 10:10:45 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_printf(const char *format, ...)
 			if ((ret += (ft_basic_oc(args, format[i]))) == 0)
 			{
 				options = ft_check_options((char *)format, i);
-				ret = ft_handleopt_oc(args, (char *)format, options, i);
+				ret = ft_handleopt_oc(args, options);
 			}
 			while (format[i] && !ft_is_outputc(format[i]))
 				i++;

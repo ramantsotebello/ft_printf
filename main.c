@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:33:54 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/13 18:53:19 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/14 12:38:04 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int		main(void)
 {
-	/*
-	char	*string = "Tebello";
-	long 	a;
+	wchar_t	*string = L"Tebello";
+/*	long 	a;
 	long long d;
 	short	e;
 	int		b;
@@ -34,8 +33,10 @@ int		main(void)
 	z = L"漢字";
 	e = 5;*/
 
-	
-	printf("%-+10s\n", "Tebello");	
+	//string[0] = 'R';
+	//printf("%s\n", string);	
+	printf("%-10.2ls\n", string);
+	ft_printf("%-10.2ls\n", string);
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);
