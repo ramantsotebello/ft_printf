@@ -23,8 +23,14 @@ int		ft_is_outputc(char c)
 
 int		ft_isflag(char c)
 {
-	if ((c == '-') || (c == '+') || (c == ' ') || (c == '0') || (c == '#')
-		|| (c == 'h') || (c == 'l') || (c == 'j') || ( c == 'z'))
+	if ((c == '-') || (c == '+') || (c == ' ') || (c == '0') || (c == '#'))
+		return (1);
+	return (0);
+}
+
+int		ft_islength_mod(char c)
+{
+	if ((c == 'h') || (c == 'l') || (c == 'j') || (c == 'z'))
 		return (1);
 	return (0);
 }
@@ -83,13 +89,34 @@ struct	ol	ft_check_options(char *str, int index)
 		}
 		options.flags[j] = '\0';
 		j = 0;
-		while ((ft_isdigit(str[i])) && (str[i]) && (str[i] != '.'))
+		while ((ft_isdigit(str[i])) && (str[i]) && (str[i] != '.' ||
+			!ft_is_outputc(str[i])))
 		{
 			j += str[i++] - '0';
 			j *= 10;
 		}
 		if (j != 0)
 			options.width = (j / 10);
+		else
+			options.width = 0;
+		j = 0;
+		if (ft_isprecision(str[i]) && (str[i + 1]) && (!ft_is_outputc(str[i + 1])))
+		{
+			i++;
+			while (ft_isdigit(str[i]) && (str[i]) && (!ft_is_outputc(str[i])))
+			{
+				j += str[i++] - '0';
+				j *= 10;
+			}
+			if (j != 0)
+				options.precision = (j / 10);
+			else
+				options.precision = 0;
+		}
+		j = 0;
+		while (ft_islength_mod(str[i]) && (str[i]) && (!ft_is_outputc(str[i])))
+			options.length[j++] = str[i++];
+		options.length[j] = '\0';
 	}
 	return (options);
 }

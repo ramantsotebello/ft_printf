@@ -14,6 +14,7 @@
 
 int		main(void)
 {
+	/*
 	char	*string = "Tebello";
 	long 	a;
 	long long d;
@@ -31,14 +32,14 @@ int		main(void)
 	w = L'z';
 	d = 10;
 	z = L"漢字";
-	e = 5;
+	e = 5;*/
 
 	
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);
-	printf("sys: %C\n", L'字');
-//	ft_printf("me : %S\n", z);
+	printf("sys: %-s\n", "This string");
+	ft_printf("me : %-s\n", "This string");
 	//printf("%d", ft_printf("%c%c\n", c, c));
 	//printf("sys: this function printed %d characters\n", x);
 	//ft_printf("me : this function printed %d characters\n", y);

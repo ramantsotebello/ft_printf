@@ -30,8 +30,7 @@ int		ft_printf(const char *format, ...)
 			if ((ret += (ft_basic_oc(args, format[i]))) == 0)
 			{
 				options = ft_check_options((char *)format, i);
-				printf("%c\n", options.flags[0]);
-				printf("%d\n", options.width);
+				ret = ft_handleopt_oc(args, (char *)format, options, i);
 			}
 			while (format[i] && !ft_is_outputc(format[i]))
 				i++;

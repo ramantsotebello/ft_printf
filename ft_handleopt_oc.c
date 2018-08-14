@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_handleopt_oc(va_list args, char c, struct op options)
+#include "ft_printf.h"
+
+int	ft_handleopt_oc(va_list args, char *s, struct ol options, int i)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
-	if (c == 's')
-	{
-		
-	}
-	ret++;
-	return (1);
+
+	return (ret);
 }
