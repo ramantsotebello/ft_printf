@@ -35,11 +35,12 @@ int		main(void)
 	e = 5;*/
 
 	
+	printf("%-+10s\n", "Tebello");	
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);
-	printf("sys: %-s\n", "This string");
-	ft_printf("me : %-s\n", "This string");
+	//printf("sys: %-s\n", "This string");
+	//ft_printf("me : %-s\n", "This string");
 	//printf("%d", ft_printf("%c%c\n", c, c));
 	//printf("sys: this function printed %d characters\n", x);
 	//ft_printf("me : this function printed %d characters\n", y);
