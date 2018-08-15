@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:12:03 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/13 18:53:20 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/15 18:50:11 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,20 @@ struct	ol	ft_check_options(char *str, int index)
 			i++;
 			while (ft_isdigit(str[i]) && (str[i]) && (!ft_is_outputc(str[i])))
 			{
-				j += str[i++] - '0';
 				j *= 10;
+				j += str[i++] - '0';
 			}
-			if (j != 0)
-				options.precision = (j / 10);
-			else
-				options.precision = 0;
 		}
+		if (j > -1)
+			options.precision = (j);
+		else
+			options.precision = -1;
 		j = 0;
 		while (ft_islength_mod(str[i]) && (str[i]) && (!ft_is_outputc(str[i])))
 			options.length[j++] = str[i++];
 		options.length[j] = '\0';
+		if (ft_is_outputc(str[i]))
+			options.type = str[i];
 	}
 	return (options);
 }

@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_number_len.c                                    :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/11 13:28:05 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:13 by tramants         ###   ########.fr       */
+/*   Created: 2018/06/12 09:19:14 by tramants          #+#    #+#             */
+/*   Updated: 2018/08/14 17:38:25 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_number_len(size_t x, int base)
+char	*ft_itoa(int n)
 {
 	size_t	i;
+	size_t	j;
+	char	*str;
 
 	i = 0;
-	while (x > 0)
+	j = ft_number_len(n, 10);
+	if (!(str = (char *)malloc(sizeof(char) * (j + 1))))
+		return (NULL);
+	str[j] = 0;
+	if (n < 0)
 	{
-		i++;
-		x /= base;
+		str[0] = '-';
+		n *= -1;
+		i = i + 1;
 	}
-	return (i);
+	while (i < j--)
+	{
+		str[j] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (str);
 }

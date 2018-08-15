@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_number_len.c                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/11 13:28:05 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:13 by tramants         ###   ########.fr       */
+/*   Created: 2018/05/28 14:45:56 by tramants          #+#    #+#             */
+/*   Updated: 2018/06/14 07:27:27 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-size_t	ft_number_len(size_t x, int base)
+int		ft_atoi(const char *str)
 {
-	size_t	i;
+	int result;
+	int i;
 
-	i = 0;
-	while (x > 0)
+	i = 1;
+	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		i++;
-		x /= base;
+		if (*str == '-')
+			i = -1;
+		str++;
 	}
-	return (i);
+	result = 0;
+	while (*str >= '0' && *str <= '9' && *str != '\0')
+	{
+		result = (result * 10) + (*str++ - 48);
+	}
+	return (result * i);
 }
