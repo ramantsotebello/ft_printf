@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/14 07:16:21 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 17:38:19 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/15 18:50:14 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ int		ft_putstr_opt(char *str, int precision)
 	int		x;
 
 	x = 0;
-	if (precision == 0)
+	if (precision == -1)
 		ft_putstr(str);
-	else if (precision > 0)
+	else if (precision > -1 && precision < ft_strlen(str))
 	{
-		while (x < precision && str[x] != '\0')
+		while (x < precision)
 			ft_putchar(str[x++]);
-		while (str[x++] != '\0')
-			ft_putchar(' ');
+	}
+	else if (precision > -1 && precision > ft_strlen(str))
+	{
+		while (str[x] != '\0')
+			ft_putchar(str[x++]);
 	}
 	return (x);
 }

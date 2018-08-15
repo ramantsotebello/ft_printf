@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:33:54 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 17:38:28 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/15 18:50:09 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int		main(void)
 	d = 10;
 	z = L"漢字";
 	e = 5;*/
-
-	//string[0] = 'R';
-	//printf("%s\n", string);	
-	printf("%-10.2s\n", "This is the string");
-	ft_printf("%-10.2s\n", "This is the string");
+	
+	printf("sys: |%#14o\n", 10);
+	//ft_printf("me : |%15p\n", str);
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);

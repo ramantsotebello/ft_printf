@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:07:40 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 17:38:18 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/15 18:50:15 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,14 @@ int	ft_strlen(char *str)
 	return (count);
 }	
 
-void	*ft_getarg(va_list args, struct ol options)
+wchar_t	*ft_getarg_S(va_list args)
 {
-	char	*str;
-	wchar_t	*strl;
-
-	if (options.type == 's')
-	{
-		str = ft_strdup(va_arg(args, char *));
-		return (str);
-	}
-	else if (options.type == 'S')
-	{
-		strl = va_arg(args, wchar_t *);
-		return (strl);
-	}
-	else if (options.type == 'c')
-		str[0] = (char)va_arg(args, int);
-	else if (options.type == 'C')
-		str[0] = (char)va_arg(args, int);
-	else if (options.type == 'P')
-		str = (char *)va_arg(args, long);
-	return (str);	
+	return (va_arg(args, wchar_t *));
 }
 
-wchar_t	*ft_getarg_wide(va_list args, struct ol options)
+wchar_t	ft_getarg_C(va_list args)
 {
-	wchar_t	*str;
-
-	if (options.type == 'S')
-		str = va_arg(args, wchar_t *);
+	return (va_arg(args, wchar_t));
 }
 
 int		ft_putspaces(int spaces)
@@ -70,12 +48,126 @@ int		ft_putspaces(int spaces)
 	int		x;
 
 	x = 0;
-	while (x++ < spaces)
+	while (x < spaces)
+	{
 		ft_putchar(' ');
+		x++;
+	}
 	return (x);
-	char	c;
 }
 
+int		ft_handleopt_c(char c, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width >= 1)
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_putchar(c); 
+			ret += ft_putspaces(opt.width - 1);	
+		}
+		else
+		{
+			ret += ft_putspaces(opt.width - 1);
+			ret += ft_putchar(c);
+		}
+	}
+	else
+		ret += ft_putchar(c);
+	return (ret);
+}
+
+int		ft_handleopt_p(long pointer, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width >= 14)
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_puthex(pointer, 2);
+			ret += ft_putspaces(opt.width - 14);	
+		}
+		else
+		{
+			ret += ft_putspaces(opt.width - 14);
+			ret += ft_puthex(pointer, 2);
+		}
+	}
+	else
+		ret += ft_puthex(pointer, 2);
+	return (ret);
+}
+
+int		ft_handleopt_s(char *s, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if ((opt.width >= ft_strlen(s)) && 
+			((opt.precision == -1) || (opt.precision > ft_strlen(s))))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_putstr(s); 
+			ret += ft_putspaces(opt.width - ft_strlen(s));	
+		}
+		else
+		{
+			ret += ft_putspaces(opt.width - ft_strlen(s));
+			ret += ft_putstr(s);
+		}
+	}
+	else if (opt.precision > -1 && opt.width >= ft_strlen(s))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_putstr_opt(s, opt.precision); 
+			ret += ft_putspaces(opt.width - opt.precision);
+		}
+		else
+		{
+			ret += ft_putspaces(opt.width - opt.precision);
+			ret += ft_putstr_opt(s, opt.precision);
+		}
+	}
+	else if (opt.precision > -1)
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_putstr_opt(s, opt.precision);
+			if (opt.width > opt.precision)
+				ret += ft_putspaces(opt.width - opt.precision);	
+		}
+		else
+		{
+			if (opt.width > opt.precision)
+				ret += ft_putspaces(opt.width - opt.precision);
+			ret += ft_putstr_opt(s, opt.precision);
+		}	
+	}
+	else
+		ret += ft_putstr(s);
+	return (ret);
+}
+
+int		ft_handleopt_oc(va_list args, struct ol opt)
+{
+	int ret;
+
+	ret = 0;
+	if (opt.type == 's')
+		ret += ft_handleopt_s(va_arg(args, char *), opt);
+	else if (opt.type == 'c')
+		ret += ft_handleopt_c(va_arg(args, int), opt);
+	else if (opt.type == 'p')
+		ret += ft_handleopt_p(va_arg(args, long), opt);
+	return (ret);
+}
+/*
 int	ft_handleopt_oc(va_list args, struct ol options)
 {
 	int	ret;
@@ -124,3 +216,4 @@ int	ft_handleopt_oc(va_list args, struct ol options)
 
 	return (ret);
 }
+*/
