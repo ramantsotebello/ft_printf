@@ -56,6 +56,19 @@ int		ft_putspaces(int spaces)
 	return (x);
 }
 
+int		ft_putcustom(int num, char custom)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		ft_putchar(custom);
+		i++;
+	}
+	return (i);
+}
+
 int		ft_handleopt_c(char c, struct ol opt)
 {
 	int		ret;
@@ -99,6 +112,153 @@ int		ft_handleopt_p(long pointer, struct ol opt)
 	}
 	else
 		ret += ft_puthex(pointer, 2);
+	return (ret);
+}
+
+int		ft_handleopt_o(unsigned int oct, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width > (int)ft_number_len(oct, 8))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			(ft_isin_str(opt.flags, '#') == 1) ? ft_putchar('0'): 0;
+			ret += ft_putoct(oct);
+			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(oct, 8), '0');
+			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(oct, 8) - 1, '0');
+			else if (ft_isin_str(opt.flags, '#'))
+				ret += ft_putspaces(opt.width - ft_number_len(oct, 8) - 1);
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(oct, 8));	
+		}
+		else
+		{
+			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(oct, 8), '0');
+			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(oct, 8) - 1, '0');
+			else if (ft_isin_str(opt.flags, '#'))
+				ret += ft_putspaces(opt.width - ft_number_len(oct, 8) - 1);
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(oct, 8));
+			(ft_isin_str(opt.flags, '#') == 1) ? ft_putchar('0'): 0;
+			ret += ft_putoct(oct);
+		}
+	}
+	else
+		ret += ft_putoct(oct);
+	return (ret);
+}
+
+int		ft_handleopt_x(unsigned int hex, struct ol opt, int cap)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width > (int)ft_number_len(hex, 16))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			(ft_isin_str(opt.flags, '#') == 1) ? ft_putstr("0x"): 0;
+			ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
+			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(hex, 16), '0');
+			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(hex, 16) - 2, '0');
+			else if (ft_isin_str(opt.flags, '#'))
+				ret += ft_putspaces(opt.width - ft_number_len(hex, 16) - 2);
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(hex, 16));	
+		}
+		else
+		{
+			(ft_isin_str(opt.flags, '#') == 1) ? ft_putstr("0x"): 0;
+			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(hex, 16), '0');
+			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
+				ret += ft_putcustom(opt.width - ft_number_len(hex, 16) - 2, '0');
+			else if (ft_isin_str(opt.flags, '#'))
+				ret += ft_putspaces(opt.width - ft_number_len(hex, 16) - 2);
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(hex, 16));
+			ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
+		}
+	}
+	else
+		ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
+	return (ret);
+}
+
+int		ft_handleopt_u(unsigned int num, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width > (int)ft_number_len(num, 10))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_putnbr(num);
+			if (ft_isin_str(opt.flags, '0'))
+				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10));	
+		}
+		else
+		{
+			if (ft_isin_str(opt.flags, '0'))
+				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10));
+			ret += ft_putnbr(num);
+		}
+	}
+	else
+		ret += ft_putnbr(num);
+	return (ret);
+}
+
+int		ft_handleopt_d(int num, struct ol opt)
+{
+	int		ret;
+	int		sign;
+	
+	ret = 0;
+	if (num < 0)
+	{
+		num = num * -1;
+		sign = 1;
+	}
+	else 
+		sign = 0;
+	if (opt.width > (int)ft_number_len(num, 10))
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += (sign == 1) ? 0: ft_putchar(' ');
+			ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
+			if (ft_isin_str(opt.flags, ' '))
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 
+						((sign == 1) ? 0: 1));
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 
+						((sign ==  1) ? 0 : 1));	
+		}
+		else
+		{
+			if (ft_isin_str(opt.flags, '0'))
+				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+			else
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10));
+			ret += (sign == 1) ? ft_putnbr(-num): ft_putnbr(num);
+		}
+	}
+	else
+		ret += ft_putnbr(num);
 	return (ret);
 }
 
@@ -165,6 +325,16 @@ int		ft_handleopt_oc(va_list args, struct ol opt)
 		ret += ft_handleopt_c(va_arg(args, int), opt);
 	else if (opt.type == 'p')
 		ret += ft_handleopt_p(va_arg(args, long), opt);
+	else if (opt.type == 'o')
+		ret += ft_handleopt_o((unsigned int)va_arg(args, unsigned int), opt);
+	else if (opt.type == 'u')
+		ret += ft_handleopt_u((unsigned int)va_arg(args, unsigned int), opt);
+	else if (opt.type == 'x')
+		ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 0);
+	else if (opt.type == 'X')
+		ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 1);
+	else if (opt.type == 'd')
+		ret += ft_handleopt_d(va_arg(args, int), opt);
 	return (ret);
 }
 /*

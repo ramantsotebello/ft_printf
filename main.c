@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 int		main(void)
 {
 //	wchar_t	*string = L"Tebello";
@@ -23,8 +22,7 @@ int		main(void)
 	//int		x;
 	//int		y;	
 	wchar_t	w;
-	wchar_t	*z;
-
+	wchar_t	*z;0000
 	a = (long)string;
 	b = 15;
 	c = 'T';
@@ -32,9 +30,10 @@ int		main(void)
 	d = 10;
 	z = L"漢字";
 	e = 5;*/
-	
-	printf("sys: |%#14o\n", 10);
-	//ft_printf("me : |%15p\n", str);
+	int x = -123;
+
+	printf("sys: |%- 15d\n", x);
+	ft_printf("me : |%- 15d\n", x);
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);

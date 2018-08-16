@@ -39,11 +39,7 @@ int		ft_basic_oc(va_list args, char c)
 		ret = ft_puthex(va_arg(args, unsigned int), 1);
 	else if (c == 'u')
 		ft_putnbr((unsigned int)va_arg(args,int));
-	else if (c == 'U')
-		ft_putnbr((unsigned int)va_arg(args, int));
 	else if (c == 'o')
-		ft_putoct((unsigned int)va_arg(args, int));
-	else if (c == 'O')
 		ft_putoct((unsigned int)va_arg(args, int));
 	else if (c == 'p')
 		ft_puthex(va_arg(args, long), 2);
