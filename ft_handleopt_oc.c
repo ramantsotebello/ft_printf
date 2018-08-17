@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:07:40 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:15 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:06:47 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,29 @@ int		ft_putcustom(int num, char custom)
 		i++;
 	}
 	return (i);
+}
+
+int		ft_handleopt_C(wchar_t c, struct ol opt)
+{
+	int		ret;
+	
+	ret = 0;
+	if (opt.width >= 1)
+	{
+		if (ft_isin_str(opt.flags, '-'))
+		{
+			ret += ft_put_wide_char(c); 
+			ret += ft_putspaces(opt.width - 1);	
+		}
+		else
+		{
+			ret += ft_putspaces(opt.width - 1);
+			ret += ft_put_wide_char(c);
+		}
+	}
+	else
+		ret += ft_put_wide_char(c);
+	return (ret);
 }
 
 int		ft_handleopt_c(char c, struct ol opt)
@@ -235,30 +258,43 @@ int		ft_handleopt_d(int num, struct ol opt)
 	}
 	else 
 		sign = 0;
-	if (opt.width > (int)ft_number_len(num, 10))
+	if (opt.width >= (int)ft_number_len(num, 10))
 	{
 		if (ft_isin_str(opt.flags, '-'))
 		{
-			ret += (sign == 1) ? 0: ft_putchar(' ');
-			ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
 			if (ft_isin_str(opt.flags, ' '))
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 
-						((sign == 1) ? 0: 1));
+				ret += (sign == 1) ? 0 : ft_putchar(' ');
+			else if (ft_isin_str(opt.flags, '+'))
+				ret += (sign != 1) ? ft_putchar('+') : 0;
+			ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
+			if (ft_isin_str(opt.flags, ' ') || ft_isin_str(opt.flags, '+'))
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 1);
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 
-						((sign ==  1) ? 0 : 1));	
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10));	
 		}
 		else
 		{
-			if (ft_isin_str(opt.flags, '0'))
+			if (ft_isin_str(opt.flags, '+') && ft_isin_str(opt.flags, '0'))
+				ret += (sign != 1) ? ft_putchar('+') : 0;
+			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '+'))
 				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+			else if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0'))
+				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 1);
+			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '+'))
+				ret += ft_putcustom(opt.width - ft_number_len(num, 10) - 1, '0');
 			else
 				ret += ft_putspaces(opt.width - ft_number_len(num, 10));
-			ret += (sign == 1) ? ft_putnbr(-num): ft_putnbr(num);
+			if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0'))
+				ret += (sign != 1) ? ft_putchar('+') : ft_putchar('-');
+			ret += ft_putnbr(num);
 		}
 	}
 	else
-		ret += ft_putnbr(num);
+	{
+		if (ft_isin_str(opt.flags, '+'))
+			ret += (sign != 1) ? ft_putchar('+') : 0;
+		ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
+	}
 	return (ret);
 }
 
@@ -323,6 +359,8 @@ int		ft_handleopt_oc(va_list args, struct ol opt)
 		ret += ft_handleopt_s(va_arg(args, char *), opt);
 	else if (opt.type == 'c')
 		ret += ft_handleopt_c(va_arg(args, int), opt);
+	else if (opt.type == 'C')
+		ret += ft_handleopt_C(va_arg(args, wchar_t), opt);
 	else if (opt.type == 'p')
 		ret += ft_handleopt_p(va_arg(args, long), opt);
 	else if (opt.type == 'o')
@@ -334,6 +372,10 @@ int		ft_handleopt_oc(va_list args, struct ol opt)
 	else if (opt.type == 'X')
 		ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 1);
 	else if (opt.type == 'd')
+		ret += ft_handleopt_d(va_arg(args, int), opt);
+	else if (opt.type == 'D')
+		ret += ft_handleopt_d((unsigned int)va_arg(args, int), opt);
+	else if (opt.type == 'i')
 		ret += ft_handleopt_d(va_arg(args, int), opt);
 	return (ret);
 }

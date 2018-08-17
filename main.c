@@ -6,11 +6,13 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:33:54 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:09 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:32:59 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <locale.h>
+
 int		main(void)
 {
 //	wchar_t	*string = L"Tebello";
@@ -30,10 +32,12 @@ int		main(void)
 	d = 10;
 	z = L"漢字";
 	e = 5;*/
-	int x = -123;
+	//setlocale(LC_ALL, "en_GB");
+	//wchar_t w  = L'漢';
+	long int x = 1200003;
 
-	printf("sys: |%- 15d\n", x);
-	ft_printf("me : |%- 15d\n", x);
+	printf("sys: |%-+ld\n%c\n", x, 'T');
+	ft_printf("me : |%-+ld\n%c\n", x, 'T');
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);

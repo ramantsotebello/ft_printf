@@ -6,7 +6,7 @@
 /*   By:  ramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 15:57:26 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:10 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/16 10:09:26 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ struct	ol ft_check_options(char *str, int index);
 int	ft_handleopt_oc(va_list args, struct ol);
 struct	ol {
 	char	flags[12];
-	int	width;
-	int	precision;
+	int		width;
+	int		precision;
 	char	length[10];
 	char	type;
+	int		char_span;
 } options_list; 
 #endif

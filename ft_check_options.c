@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:12:03 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/15 18:50:11 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:30:44 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,9 @@ struct	ol	ft_check_options(char *str, int index)
 		if (ft_is_outputc(str[i]))
 			options.type = str[i];
 	}
+	i = index;
+	while ((str[i] != '\0') && (ft_is_outputc(str[i]) != 1))
+		i++;
+	options.char_span = (i - index);
 	return (options);
 }

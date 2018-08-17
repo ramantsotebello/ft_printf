@@ -6,13 +6,13 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 14:06:07 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 14:07:07 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:18:12 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_put_wide_char(int c)
+int		ft_put_wide_char(wchar_t c)
 {
 	write(1, &c, 1);
 	return (1);
