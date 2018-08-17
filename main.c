@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/16 16:33:54 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/16 11:32:59 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 09:18:27 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int		main(void)
 	e = 5;*/
 	//setlocale(LC_ALL, "en_GB");
 	//wchar_t w  = L'漢';
-	long int x = 1200003;
+	long int x = 123;
 
-	printf("sys: |%-+ld\n%c\n", x, 'T');
-	ft_printf("me : |%-+ld\n%c\n", x, 'T');
+	printf("sys: |%.10ld\n", x);
+	ft_printf("me : |%.10ld\n", x);
 	//printf("%d\n", b);
 	//printf("%d\n", x);
 	//printf("0x%lx\n", a);

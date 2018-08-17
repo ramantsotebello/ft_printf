@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 15:21:13 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/16 11:07:51 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 07:18:06 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ int		ft_basic_oc(va_list args, char c)
 		ret = ft_putchar('%');
 	else if (c == 'c')
 		ret = ft_putchar(va_arg(args, int));
-	else if (c == 'C')
-		ret = ft_put_wide_char((wchar_t)va_arg(args, wchar_t));
 	else if (c == 's')
 		ret = ft_putstr(va_arg(args, char *));
-	else if (c == 'S')
-		ret = ft_put_wide_str(va_arg(args, wchar_t *));
 	else if (c == 'd')
 		ft_putnbr(va_arg(args, int));
 	else if (c == 'D')
