@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 09:47:01 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 17:38:26 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 21:53:04 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int		ft_puthex(size_t num, int cap)
 	char	alpha;
 	int		count;
 
+	count = 0;	
 	alpha = (cap == 1) ? 'A' : 'a';
-	num_len = ft_number_len(num, 16);
+	num_len = ft_nlen(num, 16);
+	if (num_len == 0)
+		return (ft_putchar('0'));
 	hex = (char*)malloc(sizeof(char) * num_len + 1);
 	hex[num_len] = '\0';
 	num_len--;
@@ -36,7 +39,8 @@ int		ft_puthex(size_t num, int cap)
 		num /= 16;
 	}
 	if (cap == 2)
-		ft_putstr("0x");
-	count = ft_putstr(hex);
+		count += ft_putstr("0x");
+	count += ft_putstr(hex);
+	free(hex);
 	return (count);
 }

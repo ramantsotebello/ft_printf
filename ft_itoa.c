@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/12 09:19:14 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/14 17:38:25 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 19:54:01 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_itoa(int n)
 	char	*str;
 
 	i = 0;
-	j = ft_number_len(n, 10);
+	j = ft_nlen(n, 10);
 	if (!(str = (char *)malloc(sizeof(char) * (j + 1))))
 		return (NULL);
 	str[j] = 0;

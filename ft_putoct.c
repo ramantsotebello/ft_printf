@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 13:21:53 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 13:49:25 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 19:53:49 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_putoct(size_t num)
 	char	c;
 	int		count;
 
-	num_len = ft_number_len(num, 8);
+	num_len = ft_nlen(num, 8);
 	oct = (char*)malloc(sizeof(char) * num_len + 1);
 	oct[num_len] = '\0';
 	num_len--;

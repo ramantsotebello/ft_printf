@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:07:40 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/17 08:34:18 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 23:38:58 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,31 +143,31 @@ int		ft_handleopt_o(unsigned int oct, struct ol opt)
 	int		ret;
 	
 	ret = 0;
-	if (opt.width > (int)ft_number_len(oct, 8))
+	if (opt.width > (int)ft_nlen(oct, 8))
 	{
 		if (ft_isin_str(opt.flags, '-'))
 		{
 			(ft_isin_str(opt.flags, '#') == 1) ? ft_putchar('0'): 0;
 			ret += ft_putoct(oct);
 			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(oct, 8), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(oct, 8), '0');
 			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(oct, 8) - 1, '0');
+				ret += ft_putcustom(opt.width - ft_nlen(oct, 8) - 1, '0');
 			else if (ft_isin_str(opt.flags, '#'))
-				ret += ft_putspaces(opt.width - ft_number_len(oct, 8) - 1);
+				ret += ft_putspaces(opt.width - ft_nlen(oct, 8) - 1);
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(oct, 8));	
+				ret += ft_putspaces(opt.width - ft_nlen(oct, 8));	
 		}
 		else
 		{
 			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(oct, 8), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(oct, 8), '0');
 			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(oct, 8) - 1, '0');
+				ret += ft_putcustom(opt.width - ft_nlen(oct, 8) - 1, '0');
 			else if (ft_isin_str(opt.flags, '#'))
-				ret += ft_putspaces(opt.width - ft_number_len(oct, 8) - 1);
+				ret += ft_putspaces(opt.width - ft_nlen(oct, 8) - 1);
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(oct, 8));
+				ret += ft_putspaces(opt.width - ft_nlen(oct, 8));
 			(ft_isin_str(opt.flags, '#') == 1) ? ft_putchar('0'): 0;
 			ret += ft_putoct(oct);
 		}
@@ -182,37 +182,40 @@ int		ft_handleopt_x(unsigned int hex, struct ol opt, int cap)
 	int		ret;
 	
 	ret = 0;
-	if (opt.width > (int)ft_number_len(hex, 16))
+	if (opt.width >= (int)ft_nlen(hex, 16))
 	{
 		if (ft_isin_str(opt.flags, '-'))
 		{
-			(ft_isin_str(opt.flags, '#') == 1) ? ft_putstr("0x"): 0;
+			(ft_isin_str(opt.flags, '#') == 1) ? (ret += ft_putstr("0x")): 0;
 			ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
 			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(hex, 16), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(hex, 16), '0');
 			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(hex, 16) - 2, '0');
+				ret += ft_putcustom(opt.width - ft_nlen(hex, 16) - 2, '0');
 			else if (ft_isin_str(opt.flags, '#'))
-				ret += ft_putspaces(opt.width - ft_number_len(hex, 16) - 2);
+				ret += ft_putspaces(opt.width - ft_nlen(hex, 16) - 2);
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(hex, 16));	
+				ret += ft_putspaces(opt.width - ft_nlen(hex, 16));	
 		}
 		else
 		{
-			(ft_isin_str(opt.flags, '#') == 1) ? ft_putstr("0x"): 0;
+			(ft_isin_str(opt.flags, '#') == 1) ? (ret += ft_putstr("0x")): 0;
 			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(hex, 16), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(hex, 16), '0');
 			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '#'))
-				ret += ft_putcustom(opt.width - ft_number_len(hex, 16) - 2, '0');
+				ret += ft_putcustom(opt.width - ft_nlen(hex, 16) - 2, '0');
 			else if (ft_isin_str(opt.flags, '#'))
-				ret += ft_putspaces(opt.width - ft_number_len(hex, 16) - 2);
+				ret += ft_putspaces(opt.width - ft_nlen(hex, 16) - 2);
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(hex, 16));
+				ret += ft_putspaces(opt.width - ft_nlen(hex, 16));
 			ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
 		}
 	}
 	else
-		ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
+	{
+			(ft_isin_str(opt.flags, '#') == 1) ? (ret += ft_putstr("0x")) : 0;
+			ret += (cap == 1) ? ft_puthex(hex, 1) : ft_puthex(hex, 0);
+	}
 	return (ret);
 }
 
@@ -221,27 +224,32 @@ int		ft_handleopt_u(unsigned int num, struct ol opt)
 	int		ret;
 	
 	ret = 0;
-	if (opt.width > (int)ft_number_len(num, 10))
+	if (opt.width > (int)ft_nlen(num, 10))
 	{
 		if (ft_isin_str(opt.flags, '-'))
 		{
-			ret += ft_putnbr(num);
+			ft_putnbr(num);
+			ret += ft_nlen(num, 10);
 			if (ft_isin_str(opt.flags, '0'))
-				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(num, 10), '0');
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10));	
+				ret += ft_putspaces(opt.width - ft_nlen(num, 10));	
 		}
 		else
 		{
 			if (ft_isin_str(opt.flags, '0'))
-				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
+				ret += ft_putcustom(opt.width - ft_nlen(num, 10), '0');
 			else
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10));
-			ret += ft_putnbr(num);
+				ret += ft_putspaces(opt.width - ft_nlen(num, 10));
+			ft_putnbr(num);
+			ret +=  ft_nlen(num, 10);
 		}
 	}
 	else
-		ret += ft_putnbr(num);
+	{
+		ft_putnbr(num);
+		ret += ft_nlen(num, 10); 
+	}
 	return (ret);
 }
 
@@ -258,59 +266,54 @@ int		ft_handleopt_d(int num, struct ol opt)
 	}
 	else 
 		sign = 0;
-	if (opt.width >= (int)ft_number_len(num, 10))
+	if (ft_isin_str(opt.flags, '-'))
 	{
-		if (ft_isin_str(opt.flags, '-'))
-		{
-			if (ft_isin_str(opt.flags, ' '))
-				ret += (sign == 1) ? 0 : ft_putchar(' ');
-			else if (ft_isin_str(opt.flags, '+'))
-				ret += (sign != 1) ? ft_putchar('+') : 0;
-			if (opt.precision > (int)ft_number_len(num, 10))
-				ret += ft_putcustom((opt.precision - ft_number_len(num, 10)),'0'); 
-			ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
-			if ((ft_isin_str(opt.flags, ' ') || ft_isin_str(opt.flags, '+'))
-					&& (opt.precision  < 1))
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 1);
-			else if ((ft_isin_str(opt.flags, ' ') || ft_isin_str(opt.flags, '+')) 
-					&& (opt.precision > (int)ft_number_len(num, 10)))
-				ret += ft_putspaces((opt.width > opt.precision) ? 
+		if (ft_isin_str(opt.flags, ' '))
+			ret += (sign == 1) ? 0 : ft_putchar(' ');
+		else if (ft_isin_str(opt.flags, '+'))
+			ret += (sign != 1) ? ft_putchar('+') : 0;
+		if (opt.precision > (int)ft_nlen(num, 10))
+			ret += ft_putcustom((opt.precision - ft_nlen(num, 10)),'0'); 
+		(sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
+		ret += ft_nlen(num, 10);
+		if ((ft_isin_str(opt.flags, ' ') || ft_isin_str(opt.flags, '+'))
+				&& (opt.precision  < 1))
+			ret += ft_putspaces(opt.width - ft_nlen(num, 10) - 1);
+		else if ((ft_isin_str(opt.flags, ' ') || ft_isin_str(opt.flags, '+')) 
+				&& (opt.precision > (int)ft_nlen(num, 10)))
+			ret += ft_putspaces((opt.width > opt.precision) ? 
 					(opt.width - opt.precision) - 1 : 0);
-			else
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10));	
-		}
 		else
-		{
-			if (ft_isin_str(opt.flags, '+') && ft_isin_str(opt.flags, '0'))
-				ret += (sign != 1) ? ft_putchar('+') : 0;
-			if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '+') &&
-					!(opt.precision > (int)ft_number_len(num, 10)))
-				ret += ft_putcustom(opt.width - ft_number_len(num, 10), '0');
-			else if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0')
-					&& !(opt.precision > (int)ft_number_len(num, 10)))
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10) - 1);
-			else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '+')
-					&& !(opt.precision > (int)ft_number_len(num, 10)))
-				ret += ft_putcustom(opt.width - ft_number_len(num, 10) - 1, '0');
-			else if ((ft_isin_str(opt.flags, '0') || ft_isin_str(opt.flags, '+'))
-					&& (opt.precision > (int)ft_number_len(num, 10)))
-				ret += ft_putspaces((opt.width - opt.precision) - 1);
-			else if (opt.precision >= opt.width)
-				ret += ft_putspaces(0);
-			else
-				ret += ft_putspaces(opt.width - ft_number_len(num, 10));
-			if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0'))
-				ret += (sign != 1) ? ft_putchar('+') : ft_putchar('-');
-			if (opt.precision > (int)ft_number_len(num, 10))
-				ret += ft_putcustom((opt.precision - ft_number_len(num, 10)),'0'); 
-			ret += ft_putnbr(num);
-		}
+			ret += ft_putspaces((opt.precision > (int)ft_nlen(num, 10)) ?
+					((opt.precision > opt.width ? 0 : opt.width - opt.precision))
+					:(opt.width - ft_nlen(num, 10)));	
 	}
 	else
 	{
-		if (ft_isin_str(opt.flags, '+'))
+		if (ft_isin_str(opt.flags, '+') && ft_isin_str(opt.flags, '0'))
 			ret += (sign != 1) ? ft_putchar('+') : 0;
-		ret += (sign == 1) ? ft_putnbr(-num) : ft_putnbr(num);
+		if (ft_isin_str(opt.flags, '0') && !ft_isin_str(opt.flags, '+') &&
+				!(opt.precision > (int)ft_nlen(num, 10)))
+			ret += ft_putcustom(opt.width - ft_nlen(num, 10), '0');
+		else if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0')
+				&& !(opt.precision > (int)ft_nlen(num, 10)))
+			ret += ft_putspaces(opt.width - ft_nlen(num, 10) - 1);
+		else if (ft_isin_str(opt.flags, '0') && ft_isin_str(opt.flags, '+')
+				&& !(opt.precision > (int)ft_nlen(num, 10)))
+			ret += ft_putcustom(opt.width - ft_nlen(num, 10) - 1, '0');
+		else if ((ft_isin_str(opt.flags, '0') || ft_isin_str(opt.flags, '+'))
+				&& (opt.precision > (int)ft_nlen(num, 10)))
+			ret += ft_putspaces((opt.width - opt.precision) - 1);
+		else if (opt.precision >= opt.width)
+			ret += ft_putspaces(0);
+		else
+			ret += ft_putspaces(opt.width - ft_nlen(num, 10));
+		if (ft_isin_str(opt.flags, '+') && !ft_isin_str(opt.flags, '0'))
+			ret += (sign != 1) ? ft_putchar('+') : ft_putchar('-');
+		if (opt.precision > (int)ft_nlen(num, 10))
+			ret += ft_putcustom((opt.precision - ft_nlen(num, 10)),'0'); 
+		ft_putnbr(num);
+		ret += ft_nlen(num, 10);
 	}
 	return (ret);
 }
@@ -383,7 +386,12 @@ int		ft_handleopt_oc(va_list args, struct ol opt)
 	else if (opt.type == 'u')
 		ret += ft_handleopt_u((unsigned int)va_arg(args, unsigned int), opt);
 	else if (opt.type == 'x')
-		ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 0);
+	{
+		if (ft_isin_str(opt.length, 'l'))
+			ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 0);
+		else
+			ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 0);
+	}
 	else if (opt.type == 'X')
 		ret += ft_handleopt_x((unsigned int)va_arg(args, unsigned int), opt, 1);
 	else if (opt.type == 'd')

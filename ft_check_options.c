@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/20 10:12:03 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/16 11:30:44 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 23:37:08 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_is_outputc(char c)
 {
 	if ((c == 'c') || (c == 'C') || (c == 's') || (c == 'S') || (c == 'p') 
 		|| (c == 'd') || (c == 'D') || (c == 'o') || (c == 'O') || (c == 'u')
-		|| (c == 'U') || (c == 'x') || (c == 'X') || (c == 'i') || (c == 'f'))
+		|| (c == 'U') || (c == 'x') || (c == 'X') || (c == 'i') || (c == '%'))
 		return (1);
 	return (0);
 }
@@ -99,10 +99,11 @@ struct	ol	ft_check_options(char *str, int index)
 			options.width = (j / 10);
 		else
 			options.width = 0;
-		j = 0;
+		j = -1;
 		if (ft_isprecision(str[i]) && (str[i + 1]) && (!ft_is_outputc(str[i + 1])))
 		{
 			i++;
+			j++;
 			while (ft_isdigit(str[i]) && (str[i]) && (!ft_is_outputc(str[i])))
 			{
 				j *= 10;

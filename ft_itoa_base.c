@@ -6,7 +6,7 @@
 /*   By: tramants <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/11 11:32:55 by tramants          #+#    #+#             */
-/*   Updated: 2018/08/11 16:22:47 by tramants         ###   ########.fr       */
+/*   Updated: 2018/08/17 19:53:10 by tramants         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_itoa_base(size_t num, int base, int cap)
 	size_t	num_len;
 	char	x;
 
-	num_len = ft_number_len(num, base);
+	num_len = ft_nlen(num, base);
 	str = (char*)malloc(sizeof(char) * num_len + 1);
 	str[num_len] = '\0';
 	num_len--;
